@@ -63,7 +63,7 @@ router.get(['/', '/index.html'], function(req, res, next) {
 				})
 				.then(function(videoData) {
 					res.render('index', {
-						title: 'Express',
+						title: 'APOS',
 						current: videoData.current,
 						max: videoData.max,
 						videos: videoData.videos,
@@ -82,7 +82,7 @@ router.get('/video/:videoId', function(req, res, next) {
 
 		if (!video) {
 			return res.render('video_not_found', {
-				title: 'Express',
+				title: 'APOS',
 				videoId: req.params.videoId,
 				user: req.session.user
 			});
@@ -91,7 +91,7 @@ router.get('/video/:videoId', function(req, res, next) {
 				if (err) return sendErr(res, err);
 
 				return res.render('video', {
-					title: 'Express',
+					title: 'APOS',
 					video: {
 						videoId: video._id.toString(),
 						title: video.title || '(タイトル無し)',
@@ -114,7 +114,7 @@ router.get('/video/thumbnail/:videoId', function(req, res, next) {
 
 		if (!video) {
 			return res.render('video_not_found', {
-				title: 'Express',
+				title: 'APOS',
 				videoId: req.params.videoId,
 				user: req.session.user
 			});
@@ -147,7 +147,7 @@ router.get('/video/:videoId', function(req, res, next) {
 
 		if (!video) {
 			return res.render('video_not_found', {
-				title: 'Express',
+				title: 'APOS',
 				videoId: req.params.videoId,
 				user: req.session.user
 			});
@@ -156,7 +156,7 @@ router.get('/video/:videoId', function(req, res, next) {
 				if (err) return sendErr(res, err);
 
 				return res.render('video', {
-					title: 'Express',
+					title: 'APOS',
 					video: {
 						videoId: video._id.toString(),
 						title: video.title || '(タイトル無し)',
@@ -175,7 +175,7 @@ router.get('/video/:videoId', function(req, res, next) {
 
 router.get('/upload', function(req, res, next) {
 	return res.render('upload', {
-		title: 'Express',
+		title: 'APOS',
 		user: req.session.user
 	});
 });

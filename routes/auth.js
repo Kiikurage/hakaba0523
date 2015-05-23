@@ -87,7 +87,7 @@ router.post('/logined', function(req, res, next) {
 
 router.get('/invalidToken', function(req, res, next) {
 	res.render('invalidToken', {
-		title: 'Express'
+		title: 'APOS'
 	});
 });
 
@@ -104,7 +104,7 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
 	res.render('login', {
-		title: 'Express'
+		title: 'APOS'
 	});
 });
 
