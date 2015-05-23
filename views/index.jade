@@ -5,12 +5,11 @@ block content
 	.container
 		.row
 			.col-lg-12
-				h1.page-header &#x52D5;&#x753B;&#x4E00;&#x89A7;
-					small &#x52D5;&#x753B;(&#x3053;&#x3053;&#x3092;&#x30B8;&#x30E3;&#x30F3;&#x30EB;&#x5225;&#x3068;&#x304B;&#x306B;&#x3057;&#x3066;&#x3082;&#x826F;&#x3044;&#x304B;&#x3082;)
+				h1.page-header 動画一覧
 		.row
 			each video in videos
 				.col-md-3.portfolio-item.text-center
-					a(href='#')
+					a(href='/video/#{video.videoId}')
 						img.img-responsive(src='http://placehold.it/750x450', alt='')
 						p #{video.title}
 					p by.#{video.user.name}

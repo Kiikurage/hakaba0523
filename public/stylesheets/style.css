@@ -7,3 +7,13 @@
 	border-radius: 50%;
 	margin-right: 20px;
 }
+.FBLogin-wrapper {
+	display: inline-block;
+	position: relative;
+	min-height: 0;
+	margin: 13px;
+	height: 24px;
+}
+.navbar {
+	height: 50px;
+}

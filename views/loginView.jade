@@ -1,5 +1,6 @@
 form(method='POST', action='/auth/logined')
-	fb:login-button(scope='public_profile,email', data-size="xlarge",onlogin='checkLoginState();')
+	div.FBLogin-wrapper
+		fb:login-button(scope='public_profile,email', data-size="large",onlogin='checkLoginState();')
 
 	input(type='hidden' class='FBLoginView-userId' name='userId')
 	input(type='hidden' class='FBLoginView-token' name='accessToken')

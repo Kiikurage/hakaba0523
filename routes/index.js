@@ -14,14 +14,7 @@ function sendErr(err, res, code) {
 	res.send(code || 503);
 }
 
-router.get('/', function(req, res, next) {
-	res.render('landing', {
-		title: 'Express',
-		user: req.session.user
-	});
-});
-
-router.get('/index.html', function(req, res, next) {
+router.get(['/', '/index.html'], function(req, res, next) {
 	var n = req.query.page || 1,
 		MAX_IN_A_PAGE = 50;
 
