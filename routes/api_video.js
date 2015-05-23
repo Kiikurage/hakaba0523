@@ -119,6 +119,8 @@ router.post('/', function(req, res, next) {
 		exec('ffmpeg -i ' + req.files.video.path + ' ' + '-ss 6 -vframes 1 -f image2 -s 750x450 ' +thumbnailPath, function(err, stdout, stderr){
 			if (err) return sendJSONErr(res);
 
+			console.log(thumbnailPath);
+			
 			var video = new Video({
 				path: req.files.video.path,
 				thumbnailPath: thumbnailPath,
