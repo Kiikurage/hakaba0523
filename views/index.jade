@@ -10,7 +10,7 @@ block content
 			each video in videos
 				.col-md-3.portfolio-item.text-center
 					a(href='/video/#{video.videoId}')
-						img.img-responsive(src='video.thumbnail', alt='')
+						img.img-responsive(src='#{video.thumbnail}', alt='')
 						p #{video.title}
 					p by.#{video.user.name}
 		hr
