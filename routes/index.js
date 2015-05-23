@@ -108,4 +108,43 @@ router.get('/video/:videoId', function(req, res, next) {
 
 });
 
+router.get('/video/:videoId', function(req, res, next) {
+	Video.findById(new Object(req.params.videoId), function(err, video){
+		if (err) return sendErr(res, err);
+
+		if (!video) {
+			return res.render('video_not_found', {
+				title: 'Express',
+				videoId: req.params.videoId,
+				user: req.session.user
+			});
+		} else {
+			User.findById(new ObjectId(video.userId), function(err, user) {
+				if (err) return sendErr(res, err);
+
+				return res.render('video', {
+					title: 'Express',
+					video: {
+						videoId: video._id.toString(),
+						title: video.title || '(タイトル無し)',
+						user: {
+							name: user.name,
+							id: user._id.toString()
+						}
+					},
+					user: req.session.user
+				});
+			});
+		}
+	})
+
+});
+
+router.get('/upload', function(req, res, next) {
+	return res.render('upload', {
+		title: 'Express',
+		user: req.session.user
+	});
+});
+
 module.exports = router;

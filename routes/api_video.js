@@ -5,7 +5,7 @@ var fs = require('exfs');
 var Video = require('../model/video.js');
 var User = require('../model/user.js');
 var ObjectId = require('mongoose').Types.ObjectId;
-
+var exec = require('child_process').exec;
 var ROOT = __dirname + '/../uploads/';
 
 function sendJSONErr(res, data, code) {
@@ -110,16 +110,27 @@ router.post('/', function(req, res, next) {
 			return filename + '-' + (Date.now());
 		}
 	})(req, res, function() {
-		var video = new Video({
-			path: req.files.video.path,
-			userId: req.session.user._id.toString()
-		});
 
-		video.save(function(err) {
+		var thumbnailPath = req.files.video.path.split('.');
+		thumbnailPath.pop();
+		thumbnailPath.push('.jpeg');
+		thumbnailPath = thumbnailPath.join('.');
+
+		exec('ffmpeg -i ' + req.files.video.path + ' ' + '-ss 6 -vframes 1 -f image2 -s 750x450 ' +thumbnailPath, function(err, stdout, stderr){
 			if (err) return sendJSONErr(res);
 
-			return sendJSON(res, {
-				videoId: video._id.toString()
+			var video = new Video({
+				path: req.files.video.path,
+				thumbnailPath: thumbnailPath,
+				userId: req.session.user._id.toString()
+			});
+
+			video.save(function(err) {
+				if (err) return sendJSONErr(res);
+
+				return sendJSON(res, {
+					videoId: video._id.toString()
+				});
 			});
 		});
 	});
