@@ -50,10 +50,10 @@ router.get(['/', '/index.html'], function(req, res, next) {
 						});
 
 						Video.count({}, function(err, count) {
-							if (err) reject(err);
-							if (Math.ceil(count / MAX_IN_A_PAGE) < n) reject(err);
+							if (err) return reject(err);
+							if (Math.ceil(count / MAX_IN_A_PAGE) < n) return reject(err);
 
-							resolve({
+							return resolve({
 								current: n,
 								max: Math.ceil(count / MAX_IN_A_PAGE),
 								videos: videoObjects
