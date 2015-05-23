@@ -39,7 +39,7 @@ router.get(['/', '/index.html'], function(req, res, next) {
 					return new Promise(function(resolve, reject) {
 						var videoObjects = videos.map(function(video, i) {
 							return {
-								title: 'タイトルはまだ未定',
+								title: video.title || '(タイトル無し)',
 								videoId: video._id.toString(),
 								thumbnail: video.thumbnailPath,
 								user: {
