@@ -1,1 +1,9 @@
-
+.userIcon {
+	display: inline-block;
+	position: relative;
+	border-radius: 50%;
+	height: 34px;
+	width: 34px;
+	margin: -7px;
+	margin-right: 20px;
+}
