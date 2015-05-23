@@ -66,3 +66,23 @@ body {
 	border-radius: 50%;
 	color: #fff !important;
 }
+.upload-file {
+	margin: auto;
+}
+.upload-submit {
+	background: #3F51B5;
+	font-size: 24px;
+	padding: 10px 50px;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+}
+.upload-link {
+	background: #3F51B5;
+	font-size: 24px;
+	padding: 10px 50px;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
