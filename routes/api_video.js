@@ -3,8 +3,9 @@ var multer = require('multer');
 var router = express.Router();
 var fs = require('exfs');
 var Video = require('../model/video.js');
+var User = require('../model/user.js');
 var ObjectId = require('mongoose').Types.ObjectId;
-
+var exec = require('child_process').exec;
 var ROOT = __dirname + '/../uploads/';
 
 function sendJSONErr(res, data, code) {
@@ -26,32 +27,50 @@ function sendJSON(res, data) {
 }
 
 router.get('/list', function(req, res, next) {
-	var n = req.params.page,
+	var n = req.query.page,
 		MAX_IN_A_PAGE = 50;
 
 	Video.find({})
-		.skip((n-1)*MAX_IN_A_PAGE)
+		.skip((n - 1) * MAX_IN_A_PAGE)
 		.limit(MAX_IN_A_PAGE)
-		.exec(function(err, docs) {
+		.exec(function(err, videos) {
 			if (err) return sendJSONErr(res);
 
-			var docObjects = docs.map(function(doc){
-				return {
-					title: 'タイトルはまだ未定',
-					videoId: doc._id.toString(),
-					thumbnail: 'サムネなんてなかった！！！！'
-				}
-			});
+			Promise.all(videos.map(function(video) {
+					return new Promise(function(resolve, reject) {
+						User.findById(new ObjectId(video.userId), function(err, user) {
+							if (err) {
+								return reject(err)
+							} else {
+								return resolve(user);
+							}
+						});
+					});
+				}))
+				.then(function(users) {
+					var videoObjects = videos.map(function(video, i) {
+						return {
+							title: 'タイトルはまだ未定',
+							videoId: video._id.toString(),
+							thumbnail: 'サムネなんてなかった！！！！',
+							user: {
+								userId: users[i]._id.toString(),
+								name: users[i].name
+							}
+						}
+					});
 
-			Video.count({}, function(err, count){
-				if (err) return sendJSONErr(res);
+					Video.count({}, function(err, count) {
+						if (err) return sendJSONErr(res);
+						if (Math.ceil(count / MAX_IN_A_PAGE) < n) videoObjects = [];
 
-				return sendJSON(res, {
-					max: Math.ceil(count / MAX_IN_A_PAGE),
-					current: n,
-					list: docObjects
-				});
-			});
+						return sendJSON(res, {
+							max: Math.ceil(count / MAX_IN_A_PAGE),
+							current: n,
+							list: videoObjects
+						});
+					});
+				})
 		});
 });
 
@@ -91,16 +110,29 @@ router.post('/', function(req, res, next) {
 			return filename + '-' + (Date.now());
 		}
 	})(req, res, function() {
-		var video = new Video({
-			path: req.files.video.path,
-			userId: req.session.user._id.toString()
-		});
 
-		video.save(function(err) {
+		var thumbnailPath = req.files.video.path.split('.');
+		thumbnailPath.pop();
+		thumbnailPath.push('jpeg');
+		thumbnailPath = thumbnailPath.join('.');
+
+		exec('ffmpeg -i ' + req.files.video.path + ' ' + '-ss 6 -vframes 1 -f image2 -s 750x450 ' +thumbnailPath, function(err, stdout, stderr){
 			if (err) return sendJSONErr(res);
 
-			return sendJSON(res, {
-				videoId: video._id.toString()
+			console.log(thumbnailPath);
+
+			var video = new Video({
+				path: req.files.video.path,
+				thumbnailPath: thumbnailPath,
+				userId: req.session.user._id.toString()
+			});
+
+			video.save(function(err) {
+				if (err) return sendJSONErr(res);
+
+				return sendJSON(res, {
+					videoId: video._id.toString()
+				});
 			});
 		});
 	});

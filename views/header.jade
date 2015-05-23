@@ -1,0 +1,17 @@
+nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+	.container
+		.navbar-header
+			a.navbar-brand(href='/') Hakaba
+		#bs-example-navbar-collapse-1.collapse.navbar-collapse
+			ul.nav.navbar-nav
+				li
+					a(href='/upload') Upload
+				li
+					a(href='#') Search
+				li
+					if user
+						a 
+							img.userIcon(src="https://graph.facebook.com/#{user.fbUserId}/picture")
+							span #{user.name}
+					else
+						include loginView.jade

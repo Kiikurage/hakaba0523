@@ -1,0 +1,18 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+	
+		header 
+			if user
+				img(src="https://graph.facebook.com/#{user.fbUserId}/picture")
+				span #{user.name}
+				a(href='/auth/logout') ログアウトする
+			else
+				a(href='/auth/login') ログインする
+		
+		div#content
+			block content
+			script(src="/javascripts/script.js", type="application/javascript")

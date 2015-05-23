@@ -1,4 +1,52 @@
 extends layout
 
 block content
-	include ./uploadView.jade
+	include header.jade
+	.container
+		.row
+			.col-lg-12
+				h1.page-header.text-center 動画一覧
+		.row
+			each video in videos
+				.col-md-3.portfolio-item.text-center
+					.videocard
+						a(href='/video/#{video.videoId}')
+							img.img-responsive(src='/video/thumbnail/#{video.videoId}', alt='')
+							p #{video.title}
+						p by.#{video.user.name}
+		hr
+		.row.text-center
+			.col-lg-12
+				ul.pagination
+					if current != 1
+						li
+							a(href='?page=1') &laquo
+					else
+						li
+							a &laquo
+					end
+					if current-2 > 0
+						li
+							a(href='?page=#{current-2}') #{current - 2}
+					end
+					if current-1 > 0
+						li
+							a(href='?page=#{current-1}') #{current - 1}
+					end
+					li.active
+						span #{current}
+					if current+1 < max
+						li
+							a(href='?page=#{current+1}') #{current + 1}
+					end
+					if current+2 < max
+						li
+							a(href='?page=#{current+2}') #{current + 2}
+					end
+					if current != max
+						li
+							a(href='?page=#{max}') &raquo
+					else
+						li
+							a &raquo
+					end

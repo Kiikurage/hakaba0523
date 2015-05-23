@@ -1,4 +1,11 @@
 extends layout
 
 block content
-	video(src="/api/video/#{videoId}")
+	include header.jade
+	
+	.container
+		.row
+			.col-xs-8
+				video(controls).video_video(src="/api/video/#{video.videoId}")
+				h1.video_title #{video.title}
+				p by #{video.user.name}
