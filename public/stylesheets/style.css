@@ -17,3 +17,14 @@
 .navbar {
 	height: 50px;
 }
+.video_video {
+	display: inline-block;
+	position: relative;
+	height: 400px;
+	margin: auto;
+	width: 100%;
+	background: #000;
+}
+.video_title {
+	font-weight: normal;
+}
