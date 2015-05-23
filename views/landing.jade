@@ -1,0 +1,46 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		meta(name='description', content='')
+		meta(name='author', content='')
+		title #{title}
+		link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
+		link(href="font-awesome/css/font-awesome.min.css", rel="stylesheet", type="text/css")
+		link(href="stylesheets/nivo-lightbox.css",rel="stylesheet")
+		link(href="stylesheets/nivo-lightbox-theme/default/default.css",rel="stylesheet",type="text/css")
+		link(href="stylesheets/owl.carousel.css", rel="stylesheet",media="screen")
+		link(href="stylesheets/owl.theme.css", rel="stylesheet",media="screen")
+		link(href="stylesheets/animate.css", rel="stylesheet")
+		link(href="stylesheets/landingstyle.css", rel="stylesheet")
+		link(href="color/default.css", rel="stylesheet")
+		script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+		script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+		script(src="javascripts/script.js", type="application/javascript")
+		script(src='javascripts/jquery-1.10.2.js')
+		script(src='javascripts/jquery.easing.min.js')
+		script(src='javascripts/jquery.sticky.js')
+		script(src='javascripts/jquery.scrollTo.js')
+		script(src='javascripts/stellar.js')
+		script(src='javascripts/wow.min.js')
+		script(src='javascripts/owl.carousel.min.js')
+		script(src='javascripts/nivo-lightbox.min.js')
+		script(src='javascripts/custom.js')
+	body
+		section#about.home-section
+			.container
+				.row
+					.col-lg-8.col-lg-offset-2
+						.section-heading.text-center
+							.wow.bounceInDown(data-wow-delay='0.2s')
+								h2 #{title}
+							| 動画投稿サイト
+							p.wow.bounceInUp(data-wow-delay='0.3s')
+			.container
+				.row
+					.col-md-12.text-center
+						h2
+							strong Facebookでログイン
+						include loginView.jade

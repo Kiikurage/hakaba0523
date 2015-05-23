@@ -36,7 +36,7 @@ router.post('/logined', function(req, res, next) {
 
 					if (session) {
 						res.cookie('token', session.token);
-						return res.redirect('/');
+						return res.redirect('/index.html');
 
 					} else {
 						var token = crypto.createHash("md5").update(userId + 'chikuwa BIG myouzin').digest("hex"),
@@ -49,7 +49,7 @@ router.post('/logined', function(req, res, next) {
 							if (err) return sendErr(res, err);
 
 							res.cookie('token', token);
-							return res.redirect('/');
+							return res.redirect('/index.html');
 						});
 					}
 				});
@@ -74,7 +74,7 @@ router.post('/logined', function(req, res, next) {
 						if (err) return sendErr(res, err);
 
 						res.cookie('token', token);
-						return res.redirect('/');
+						return res.redirect('/index.html');
 					});
 				});
 			}
@@ -90,13 +90,13 @@ router.get('/invalidToken', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-	if (!req.session.session) return res.redirect('/');
+	if (!req.session.session) return res.redirect('/index.html');
 
 	Session.findByIdAndRemove(req.session.session, function(err){
 		if (err) return sendErr(res, err);
 
 		res.cookie('token', '');
-		return res.redirect('/');
+		return res.redirect('/index.html');
 	});
 });
 
