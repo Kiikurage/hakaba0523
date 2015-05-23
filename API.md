@@ -88,9 +88,9 @@ POST /video/:videoId
 
 ## アップロードする(****認証が必要*****)
 
-`Content-Type: form-multipart` でお願いします。
+`Content-Type: multipart/form-data` でお願いします。
 
-iOSは詳しくは(ここ)[http://stackoverflow.com/questions/24250475/post-multipart-form-data-with-objective-c]
+iOSは詳しくは[ここ](http://stackoverflow.com/questions/24250475/post-multipart-form-data-with-objective-c)
 
 #### リクエスト
 
