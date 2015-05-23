@@ -77,7 +77,7 @@ router.get(['/', '/index.html'], function(req, res, next) {
 });
 
 router.get('/video/:videoId', function(req, res, next) {
-	Video.findById(new Object(req.params.videoId), function(err, video){
+	Video.findById(new Object(req.params.videoId), function(err, video) {
 		if (err) return sendErr(res, err);
 
 		if (!video) {
@@ -108,8 +108,41 @@ router.get('/video/:videoId', function(req, res, next) {
 
 });
 
+router.get('/video/thumbnail/:videoId', function(req, res, next) {
+	Video.findById(new Object(req.params.videoId), function(err, video) {
+		if (err) return sendErr(res, err);
+
+		if (!video) {
+			return res.render('video_not_found', {
+				title: 'Express',
+				videoId: req.params.videoId,
+				user: req.session.user
+			});
+		} else {
+			User.findById(new ObjectId(video.userId), function(err, user) {
+				if (err) return sendErr(res, err);
+
+				return res.sendFile(video.thumbnailPath, {
+					root: '/',
+					dotfiles: 'deny',
+					headers: {
+						'x-timestamp': Date.now(),
+						'x-sent': true
+					}
+				}, function(err) {
+					if (err) {
+						console.log(err);
+						res.status(err.status).end();
+					}
+				});
+			});
+		}
+	})
+
+});
+
 router.get('/video/:videoId', function(req, res, next) {
-	Video.findById(new Object(req.params.videoId), function(err, video){
+	Video.findById(new Object(req.params.videoId), function(err, video) {
 		if (err) return sendErr(res, err);
 
 		if (!video) {
