@@ -1,0 +1,7 @@
+.git
+.DS_Store
+.sass-cache
+
+node_modules
+db
+uploads

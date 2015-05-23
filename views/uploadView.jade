@@ -1,0 +1,12 @@
+form
+	p
+		input(type="file", name="video")
+	p
+		input(type="submit", value="send")
+	p
+		a(style="display: none;") 確認する
+	script(type='application/javascript').
+		var $form = Array.prototype.pop.call(document.scripts).parentNode;
+		window.addEventListener('DOMContentLoaded', function(){
+			new Application.UploadView($form);
+		});
