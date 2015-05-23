@@ -28,3 +28,41 @@
 .video_title {
 	font-weight: normal;
 }
+.navbar-inverse {
+	background: #3F51B5;
+	border-color: #3F51B5;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.navbar-inverse .navbar-brand {
+	color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: #fff;
+}
+body {
+	background: #fcfcfc;
+}
+.videocard {
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	border-radius: 3px;
+	padding: 20px;
+	marign: 5px;
+	box-sizing: border-box;
+	transition: 0.2s ease;
+	cursor: pointer;
+}
+.videocard:hover {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.pagination>li>a {
+	border:none !important;
+	background: transparent !important;
+	color: #3F51B5;
+}
+.pagination>.active>span {
+	border:none !important;
+	background: #3F51B5 !important;
+	border-radius: 50%;
+	color: #fff !important;
+}
