@@ -50,7 +50,7 @@ router.get('/list', function(req, res, next) {
 				.then(function(users) {
 					var videoObjects = videos.map(function(video, i) {
 						return {
-							title: 'タイトルはまだ未定',
+							title: video.title || '(タイトル無し)',
 							videoId: video._id.toString(),
 							thumbnail: 'サムネなんてなかった！！！！',
 							user: {
