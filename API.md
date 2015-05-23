@@ -129,3 +129,35 @@ DELETE /video/:videoId
 #### レスポンス
 
 なし
+
+------
+
+## 動画一覧の取得
+
+#### リクエスト
+
+##### URL
+
+```
+GET /video/list?page=n
+```
+
+##### URLパラメータ
+
+`n: ページ数`
+
+#### レスポンス
+
+```
+{
+	"max": 50,	//合計ページ数（総動画数ではない！）
+	"current": 3, //現在のページ数。つまりリクエストの `page=n` と同じ。1からスタート
+	"list": [{
+		"videoId": "12345678",	//videoId
+		"title": "videoのタイトル"
+		"thumbnail": "http://hogehogehoge",	//サムネのURL
+	}, {
+		//繰り返し
+	}]
+}
+```

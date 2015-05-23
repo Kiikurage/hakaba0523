@@ -25,8 +25,38 @@ function sendJSON(res, data) {
 	}));
 }
 
+router.get('/list', function(req, res, next) {
+	var n = req.params.page,
+		MAX_IN_A_PAGE = 50;
+
+	Video.find({})
+		.skip((n-1)*MAX_IN_A_PAGE)
+		.limit(MAX_IN_A_PAGE)
+		.exec(function(err, docs) {
+			if (err) return sendJSONErr(res);
+
+			var docObjects = docs.map(function(doc){
+				return {
+					title: 'タイトルはまだ未定',
+					videoId: doc._id.toString(),
+					thumbnail: 'サムネなんてなかった！！！！'
+				}
+			});
+
+			Video.count({}, function(err, count){
+				if (err) return sendJSONErr(res);
+
+				return sendJSON(res, {
+					max: Math.ceil(count / MAX_IN_A_PAGE),
+					current: n,
+					list: docObjects
+				});
+			});
+		});
+});
+
 router.get('/:videoId', function(req, res, next) {
-	Video.findById(new ObjectId(req.params.videoId), function(err, video){
+	Video.findById(new ObjectId(req.params.videoId), function(err, video) {
 		if (err) {
 			console.error(err);
 			return res.sendStatus(503);
@@ -58,7 +88,7 @@ router.post('/', function(req, res, next) {
 	multer({
 		dest: ROOT,
 		rename: function(fieldname, filename) {
-			return filename+'-'+(Date.now());
+			return filename + '-' + (Date.now());
 		}
 	})(req, res, function() {
 		var video = new Video({
@@ -66,7 +96,7 @@ router.post('/', function(req, res, next) {
 			userId: req.session.user._id.toString()
 		});
 
-		video.save(function(err){
+		video.save(function(err) {
 			if (err) return sendJSONErr(res);
 
 			return sendJSON(res, {
@@ -79,13 +109,13 @@ router.post('/', function(req, res, next) {
 router.delete('/:videoId', function(req, res, next) {
 	if (!req.session.user) return sendJSONErr(res, 'permission denied', 403);
 
-	Video.findById(new ObjectId(req.params.videoId), function(err, video){
+	Video.findById(new ObjectId(req.params.videoId), function(err, video) {
 		if (err) return sendJSONErr(res);
 
 		if (!video) return sendJSONErr(res, 'not found', 404);
 		if (video.userId !== req.session.user._id.toString()) return sendJSONErr(res, 'permission denied', 403);
 
-		Video.findByIdAndRemove(video._id, function(err){
+		Video.findByIdAndRemove(video._id, function(err) {
 			if (err) return sendJSONErr(res);
 
 			fs.unlink(video.path, function(err) {
