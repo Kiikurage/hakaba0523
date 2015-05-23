@@ -41,7 +41,7 @@ router.get(['/', '/index.html'], function(req, res, next) {
 							return {
 								title: 'タイトルはまだ未定',
 								videoId: video._id.toString(),
-								thumbnail: video.thumbnailPath
+								thumbnail: video.thumbnailPath,
 								user: {
 									userId: users[i]._id.toString(),
 									name: users[i].name
