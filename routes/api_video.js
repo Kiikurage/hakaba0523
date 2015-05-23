@@ -93,10 +93,6 @@ router.get('/:videoId', function(req, res, next) {
 				'x-sent': true
 			}
 		}, function(err) {
-			if (err) {
-				console.log(err);
-				return res.sendStatus(503);
-			}
 		});
 	});
 });
