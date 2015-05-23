@@ -22,7 +22,6 @@ router.get(['/', '/index.html'], function(req, res, next) {
 		.skip((n - 1) * MAX_IN_A_PAGE)
 		.limit(MAX_IN_A_PAGE)
 		.exec(function(err, videos) {
-			console.log(err, videos);
 			if (err) return sendErr(res);
 
 			Promise.all(videos.map(function(video) {
@@ -60,6 +59,9 @@ router.get(['/', '/index.html'], function(req, res, next) {
 								videos: videoObjects
 							});
 						});
+					})
+					.catch(function(err) {
+						reject(err);
 					});
 				})
 				.then(function(videoData) {
