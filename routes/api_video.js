@@ -27,7 +27,7 @@ function sendJSON(res, data) {
 }
 
 router.get('/list', function(req, res, next) {
-	var n = req.params.page,
+	var n = req.query.page,
 		MAX_IN_A_PAGE = 50;
 
 	Video.find({})
