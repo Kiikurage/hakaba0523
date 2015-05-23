@@ -155,6 +155,10 @@ GET /video/list?page=n
 	"list": [{
 		"videoId": "12345678",	//videoId
 		"title": "videoのタイトル"
+		"user": {	//投稿者
+			"userId": "23456789",	//ユーザーのID
+			"name": "たなかたろう"	//ユーザー名
+		},
 		"thumbnail": "http://hogehogehoge",	//サムネのURL
 	}, {
 		//繰り返し
