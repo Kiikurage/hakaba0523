@@ -20,7 +20,9 @@ router.post('/logined', function(req, res, next) {
 			fbResUserId = data.id;
 
 		if (!fbResUserId || fbResUserId !== userId) {
-			return res.redirect('/login/invalidToken');
+			console.log(fbResUserId);
+			console.log(userId);
+			return res.redirect('/auth/invalidToken');
 		}
 
 		User.findOne({
