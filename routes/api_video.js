@@ -95,7 +95,7 @@ router.get('/:videoId', function(req, res, next) {
 		}, function(err) {
 			if (err) {
 				console.log(err);
-				res.status(err.status).end();
+				return res.sendStatus(503);
 			}
 		});
 	});
