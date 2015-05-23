@@ -120,7 +120,7 @@ router.post('/', function(req, res, next) {
 			var video = new Video({
 				path: req.files.video.path,
 				thumbnailPath: thumbnailPath,
-				title: req.params.title,
+				title: req.body.title,
 				userId: req.session.user._id.toString()
 			});
 
