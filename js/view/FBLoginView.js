@@ -12,10 +12,6 @@ function FBLoginView($base) {
 			xfbml: true,
 			version: 'v2.3'
 		});
-
-		FB.getLoginStatus(function(response) {
-			self.onStatusChange(response);
-		});
 	});
 	(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
