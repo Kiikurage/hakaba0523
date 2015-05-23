@@ -8,62 +8,48 @@ block content
 				h1.page-header &#x52D5;&#x753B;&#x4E00;&#x89A7;
 					small &#x52D5;&#x753B;(&#x3053;&#x3053;&#x3092;&#x30B8;&#x30E3;&#x30F3;&#x30EB;&#x5225;&#x3068;&#x304B;&#x306B;&#x3057;&#x3066;&#x3082;&#x826F;&#x3044;&#x304B;&#x3082;)
 		.row
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-		.row
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-		.row
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
-			.col-md-3.portfolio-item
-				a(href='#')
-					img.img-responsive(src='http://placehold.it/750x450', alt='')
+			each video in videos
+				.col-md-3.portfolio-item.text-center
+					a(href='#')
+						img.img-responsive(src='http://placehold.it/750x450', alt='')
+						p #{video.title}
+					p by.#{video.user.name}
 		hr
 		.row.text-center
 			.col-lg-12
 				ul.pagination
-					li
-						a(href='#') &laquo;
+					if current != 1
+						li
+							a(href='?page=1') &laquo
+					else
+						li
+							a &laquo
+					end
+					if current-2 > 0
+						li
+							a(href='?page=#{current-2}') #{current - 2}
+					end
+					if current-1 > 0
+						li
+							a(href='?page=#{current-1}') #{current - 1}
+					end
 					li.active
-						a(href='#') 1
-					li
-						a(href='#') 2
-					li
-						a(href='#') 3
-					li
-						a(href='#') 4
-					li
-						a(href='#') 5
-					li
-						a(href='#') &raquo;
+						span #{current}
+					if current+1 < max
+						li
+							a(href='?page=#{current+1}') #{current + 1}
+					end
+					if current+2 < max
+						li
+							a(href='?page=#{current+2}') #{current + 2}
+					end
+					if current != max
+						li
+							a(href='?page=#{max}') &raquo
+					else
+						li
+							a &raquo
+					end
 		hr
 		footer
 			.row
