@@ -77,7 +77,7 @@ GET /auth/logout
 ##### URL
 
 ```
-POST /video/:videoId
+GET /video/:videoId
 ```
 
 #### レスポンス
