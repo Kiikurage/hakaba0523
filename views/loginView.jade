@@ -1,4 +1,4 @@
-form(method='POST', action='/auth/logined')
+form#FBLogin-form(method='POST', action='/auth/logined')
 	div.FBLogin-wrapper
 		fb:login-button(scope='public_profile,email', data-size="large",onlogin='checkLoginState();')
 
@@ -6,7 +6,6 @@ form(method='POST', action='/auth/logined')
 	input(type='hidden' class='FBLoginView-token' name='accessToken')
 
 	script(type='application/javascript').
-		var $form = Array.prototype.pop.call(document.scripts).parentNode;
 		window.addEventListener('DOMContentLoaded', function(){
-			new Application.FBLoginView($form);
+			new Application.FBLoginView(document.getElementById('FBLogin-form'));
 		});

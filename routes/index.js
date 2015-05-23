@@ -60,9 +60,6 @@ router.get(['/', '/index.html'], function(req, res, next) {
 							});
 						});
 					})
-					.catch(function(err) {
-						reject(err);
-					});
 				})
 				.then(function(videoData) {
 					res.render('index', {
