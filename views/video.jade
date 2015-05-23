@@ -6,6 +6,6 @@ block content
 	.container
 		.row
 			.col-xs-12
-				video(controls).video_video(src="/api/video/#{video.videoId}")
+				video.video_video(src="/api/video/#{video.videoId}", controls)
 				h1.video_title #{video.title}
 				p by #{video.user.name}
