@@ -62,6 +62,7 @@ router.get('/list', function(req, res, next) {
 
 					Video.count({}, function(err, count) {
 						if (err) return sendJSONErr(res);
+						if (Math.ceil(count / MAX_IN_A_PAGE) < page) videoObjects = [];
 
 						return sendJSON(res, {
 							max: Math.ceil(count / MAX_IN_A_PAGE),
